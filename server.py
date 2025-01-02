@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 import openai
 import os
+from flask_cors import CORS
+
+CORS(app)
 
 
 # Load the .env file
