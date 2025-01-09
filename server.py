@@ -26,21 +26,20 @@ def chat():
         if not user_message:
             return jsonify({"error": "No message provided"}), 400
 
-        client = openai.Client()
-        q = client.chat.completions.create(
-            model="gpt-4o", 
-            messages=[{"role": "user", "content": "WAZZUP!"}]
+        # Send user_message to OpenAI
+        response = openai.ChatCompletion.create(
+            model="gpt-4",  # Replace 'gpt-4o' with 'gpt-4' if necessary
+            messages=[
+                {"role": "user", "content": user_message}
+            ]
         )
 
         # Get the response from OpenAI
-        response_content = q.choices[0].message.content
+        response_content = response.choices[0].message.content
         return jsonify({"response": response_content})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
