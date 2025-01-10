@@ -22,14 +22,16 @@ def chat():
         # Get user input from the request
         data = request.json
         user_message = data.get("message", "")
+        print(type(user_message))
 
         if not user_message:
             return jsonify({"error": "No message provided"}), 400
 
         client = openai.Client()
+        prompty = "You are promoto." + user_message
         q = client.chat.completions.create(
             model="gpt-4o", 
-            messages=[{"role": "user", "content": "WAZZUP!"}]
+            messages=[{"role": "user", "content": prompty}]
         )
 
         # Get the response from OpenAI
@@ -42,5 +44,3 @@ def chat():
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
