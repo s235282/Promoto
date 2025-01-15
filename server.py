@@ -6,7 +6,10 @@ from flask_cors import CORS  # Import Flask-CORS
 
 # Load the .env file
 load_dotenv()
-preprompt = open("preprompt.txt", "r")
+
+with open('preprompt.txt', 'r') as file:
+    # Read the content of the file into a string
+    preprompt = file.read()
 
 # Retrieve the OpenAI API key from the environment
 openai.api_key = os.getenv("OPENAI_API_KEY")
