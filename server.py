@@ -6,6 +6,7 @@ from flask_cors import CORS  # Import Flask-CORS
 
 # Load the .env file
 load_dotenv()
+preprompt = open("preprompt.txt", "r")
 
 # Retrieve the OpenAI API key from the environment
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -28,7 +29,7 @@ def chat():
             return jsonify({"error": "No message provided"}), 400
 
         client = openai.Client()
-        prompty = "You are promoto." + user_message
+        prompty = preprompt + user_message
         q = client.chat.completions.create(
             model="gpt-4o", 
             messages=[{"role": "user", "content": prompty}]
